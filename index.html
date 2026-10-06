@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EA3. Aplicaciones ofimáticas | Joaquín Rodriguez Morales</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f3f7fb;
+            color: #19324a;
+            line-height: 1.6;
+        }
+
+        /* ENCABEZADO */
+        header {
+            background: #09243d;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,.18);
+        }
+
+        .navbar {
+            max-width: 1150px;
+            margin: auto;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            height: 58px;
+            width: auto;
+            background: white;
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #66baff;
+        }
+
+        /* PORTADA */
+        .hero {
+            background: linear-gradient(135deg, #071c30, #155486);
+            color: white;
+            padding: 70px 25px;
+        }
+
+        .hero-content {
+            max-width: 1150px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .small-title {
+            color: #82c7ff;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.05;
+            margin: 15px 0;
+        }
+
+        h1 span {
+            color: #72bcff;
+        }
+
+        .description {
+            font-size: 18px;
+            color: #dcefff;
+            max-width: 700px;
+        }
+
+        .datos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .dato {
+            border: 1px solid rgba(255,255,255,.35);
+            background: rgba(255,255,255,.08);
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+        }
+
+        /* ILUSTRACIÓN */
+        .hero-card {
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 25px;
+            padding: 35px;
+            text-align: center;
+        }
+
+        .cloud {
+            font-size: 100px;
+            margin-bottom: 10px;
+        }
+
+        .hero-card h2 {
+            font-size: 25px;
+        }
+
+        .hero-card p {
+            color: #cce7fa;
+            margin-top: 5px;
+        }
+
+        /* CONTENIDO */
+        main {
+            max-width: 1150px;
+            margin: auto;
+            padding: 60px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title small {
+            color: #126ac7;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .section-title h2 {
+            font-size: 35px;
+            color: #09243d;
+            margin: 8px 0;
+        }
+
+        .section-title p {
+            color: #60778b;
+        }
+
+        /* TARJETAS */
+        .preguntas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #dce7ef;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(17,49,78,.08);
+            transition: .2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 30px rgba(17,49,78,.15);
+        }
+
+        .numero {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #126ac7, #59b2ff);
+            color: white;
+            display: grid;
+            place-items: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #09243d;
+            font-size: 19px;
+            line-height: 1.35;
+            margin-bottom: 13px;
+        }
+
+        .card p {
+            color: #486174;
+            font-size: 15px;
+        }
+
+        /* SECCIÓN VISUAL */
+        .visual {
+            margin: 55px 0;
+            padding: 40px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #e7f4ff, #ffffff);
+            border: 1px solid #d5e7f5;
+            text-align: center;
+        }
+
+        .visual h2 {
+            color: #09243d;
+            margin-bottom: 25px;
+        }
+
+        .iconos {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .icono {
+            background: white;
+            width: 150px;
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 0 5px 18px rgba(0,0,0,.08);
+        }
+
+        .icono .emoji {
+            font-size: 45px;
+            margin-bottom: 8px;
+        }
+
+        .icono strong {
+            color: #173a56;
+        }
+
+        /* FUENTES */
+        .documento {
+            margin-top: 50px;
+            padding: 35px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #09243d, #185681);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .documento h2 {
+            margin-bottom: 5px;
+        }
+
+        .documento p {
+            color: #d4e9fa;
+        }
+
+        .fuentes-lista {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+
+        .fuentes-lista li {
+            margin-bottom: 8px;
+            color: #d4e9fa;
+        }
+
+        .fuentes-lista a {
+            color: #72bcff;
+            text-decoration: none;
+        }
+
+        .fuentes-lista a:hover {
+            text-decoration: underline;
+        }
+
+        /* PIE */
+        footer {
+            background: #061a2d;
+            color: #c7d8e5;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 850px) {
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .preguntas {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 580px) {
+
+            .preguntas {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 7px;
+                font-size: 12px;
+            }
+
+            .documento {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="navbar">
+
+        <!-- LOGO UVEG -->
+        <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/1/19/UVEG_Logo.jpg"
+            class="logo"
+            alt="Logo UVEG"
+        >
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#contenido">Contenido</a>
+            <a href="#fuentes">Fuentes</a>
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- PORTADA -->
+
+<section class="hero" id="inicio">
+
+    <div class="hero-content">
+
+        <div>
+
+            <div class="small-title">
+                Aplicaciones Web PREPA+ v2
+            </div>
+
+            <h1>
+                Aplicaciones ofimáticas
+                <span>en la nube</span>
+            </h1>
+
+            <p class="description">
+                Las aplicaciones ofimáticas en la nube permiten crear,
+                editar, almacenar y compartir información mediante Internet,
+                facilitando el trabajo y la colaboración desde diferentes dispositivos.
+            </p>
+
+            <div class="datos">
+
+                <div class="dato">
+                    Joaquín Rodriguez Morales
+                </div>
+
+                <div class="dato">
+                    Matrícula: 26021030
+                </div>
+
+                <div class="dato">
+                    UVEG
+                </div>
+
+                <div class="dato">
+                    6 de octubre de 2026
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <div class="cloud">
+                ☁️
+            </div>
+
+            <h2>
+                Trabaja desde cualquier lugar
+            </h2>
+
+            <p>
+                Crear · Guardar · Compartir · Colaborar
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<main>
+
+    <!-- INTRODUCCIÓN -->
+
+    <section id="contenido">
+
+        <div class="section-title">
+
+            <small>
+                EA3. Aplicaciones ofimáticas
+            </small>
+
+            <h2>
+                Preguntas y respuestas
+            </h2>
+
+            <p>
+                Conceptos principales sobre la nube,
+                aplicaciones web, sistemas operativos
+                y servicios de almacenamiento.
+            </p>
+
+        </div>
+
+
+        <div class="preguntas">
+
+
+            <!-- 1 -->
+
+            <article class="card">
+
+                <div class="numero">1</div>
+
+                <h3>
+                    ¿Qué es la nube?
+                </h3>
+
+                <p>
+                    La nube es un conjunto de servicios informáticos
+                    que permite guardar, procesar y consultar información
+                    mediante Internet. El usuario puede acceder a sus
+                    archivos y servicios desde distintos dispositivos
+                    con conexión a Internet.
+                </p>
+
+            </article>
+
+
+            <!-- 2 -->
+
+            <article class="card">
+
+                <div class="numero">2</div>
+
+                <h3>
+                    ¿Qué es una nube híbrida?
+                </h3>
+
+                <p>
+                    Una nube híbrida combina recursos de una nube privada
+                    con servicios de una nube pública. Permite mantener
+                    cierta información en un entorno privado y utilizar
+                    recursos públicos cuando se necesita mayor flexibilidad
+                    o capacidad.
+                </p>
+
+            </article>
+
+
+            <!-- 3 -->
+
+            <article class="card">
+
+                <div class="numero">3</div>
+
+                <h3>
+                    ¿A quién se le atribuye el concepto de computación en la nube?
+                </h3>
+
+                <p>
+                    El concepto de computación en la nube se relaciona con
+                    John McCarthy, quien en 1961 planteó la idea de que la
+                    computación podría ofrecerse como un servicio público.
+                    Su desarrollo posterior fue posible gracias a avances
+                    en redes, virtualización e Internet.
+                </p>
+
+            </article>
+
+
+            <!-- 4 -->
+
+            <article class="card">
+
+                <div class="numero">4</div>
+
+                <h3>
+                    Menciona ocho características de las aplicaciones en la nube.
+                </h3>
+
+                <p>
+                    1) Acceso desde Internet.<br>
+                    2) Disponibilidad desde diferentes dispositivos.<br>
+                    3) Almacenamiento remoto.<br>
+                    4) Sincronización de información.<br>
+                    5) Trabajo colaborativo.<br>
+                    6) Escalabilidad.<br>
+                    7) Actualizaciones administradas por el proveedor.<br>
+                    8) Posibilidad de compartir archivos y recursos.
+                </p>
+
+            </article>
+
+
+            <!-- 5 -->
+
+            <article class="card">
+
+                <div class="numero">5</div>
+
+                <h3>
+                    ¿Qué es un sistema operativo y para qué sirve?
+                </h3>
+
+                <p>
+                    Es el software principal que administra los recursos
+                    de una computadora o dispositivo. Controla componentes
+                    como la memoria y el procesador, permite ejecutar
+                    aplicaciones y facilita la interacción entre el usuario
+                    y el equipo.
+                </p>
+
+            </article>
+
+
+            <!-- 6 -->
+
+            <article class="card">
+
+                <div class="numero">6</div>
+
+                <h3>
+                    ¿Cuál es la diferencia principal entre un sistema operativo
+                    y un sistema operativo móvil?
+                </h3>
+
+                <p>
+                    El sistema operativo de computadora está diseñado
+                    principalmente para computadoras de escritorio y laptops.
+                    El sistema operativo móvil está optimizado para teléfonos
+                    inteligentes y tabletas, considerando pantalla táctil,
+                    batería, sensores y conectividad inalámbrica.
+                </p>
+
+            </article>
+
+
+            <!-- 7 -->
+
+            <article class="card">
+
+                <div class="numero">7</div>
+
+                <h3>
+                    ¿En qué tipos de dispositivos se usa el sistema operativo Android?
+                </h3>
+
+                <p>
+                    Principalmente en teléfonos inteligentes y tabletas.
+                    También puede encontrarse en algunos relojes inteligentes,
+                    televisores, automóviles y otros dispositivos.
+                </p>
+
+            </article>
+
+
+            <!-- 8 -->
+
+            <article class="card">
+
+                <div class="numero">8</div>
+
+                <h3>
+                    Menciona tres aplicaciones web.
+                </h3>
+
+                <p>
+                    Tres ejemplos son Google Docs, Google Drive y Canva.
+                    Funcionan mediante Internet y permiten crear documentos,
+                    almacenar archivos, diseñar contenido y colaborar
+                    con otras personas.
+                </p>
+
+            </article>
+
+
+            <!-- 9 -->
+
+            <article class="card">
+
+                <div class="numero">9</div>
+
+                <h3>
+                    ¿Qué niveles de acceso se pueden seleccionar al compartir
+                    un documento en Google Drive?
+                </h3>
+
+                <p>
+                    Se pueden asignar permisos como lector, comentarista
+                    o editor. El lector puede consultar el contenido,
+                    el comentarista puede agregar comentarios y el editor
+                    puede modificar el documento.
+                </p>
+
+            </article>
+
+
+            <!-- 10 -->
+
+            <article class="card">
+
+                <div class="numero">10</div>
+
+                <h3>
+                    ¿Para qué sirve Dropbox?
+                </h3>
+
+                <p>
+                    Es un servicio de almacenamiento en la nube que permite
+                    guardar archivos en Internet, sincronizarlos entre
+                    dispositivos y compartirlos con otras personas.
+                </p>
+
+            </article>
+
+
+            <!-- 11 -->
+
+            <article class="card">
+
+                <div class="numero">11</div>
+
+                <h3>
+                    ¿Qué es OneDrive?
+                </h3>
+
+                <p>
+                    Es el servicio de almacenamiento en la nube de Microsoft.
+                    Permite guardar, sincronizar y compartir archivos en línea
+                    y acceder a ellos desde diferentes dispositivos.
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- DECORACIÓN / IMÁGENES -->
+
+    <section class="visual">
+
+        <h2>
+            Herramientas y conceptos relacionados
+        </h2>
+
+        <div class="iconos">
+
+            <div class="icono">
+                <div class="emoji">☁️</div>
+                <strong>La nube</strong>
+            </div>
+
+            <div class="icono">
+                <div class="emoji">💻</div>
+                <strong>Aplicaciones web</strong>
+            </div>
+
+            <div class="icono">
+                <div class="emoji">📱</div>
+                <strong>Dispositivos</strong>
+            </div>
+
+            <div class="icono">
+                <div class="emoji">🔄</div>
+                <strong>Sincronización</strong>
+            </div>
+
+            <div class="icono">
+                <div class="emoji">🤝</div>
+                <strong>Colaboración</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FUENTES DE INFORMACIÓN -->
+
+    <section class="documento" id="fuentes">
+
+        <div>
+
+            <h2>
+                Fuentes de información
+            </h2>
+
+            <p>
+                Fuentes consultadas para complementar la información
+                presentada en este blog.
+            </p>
+
+            <ul class="fuentes-lista">
+
+                <li>
+                    <a href="https://workspace.google.com/" target="_blank">
+                        Google Workspace
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.microsoft.com/microsoft-365" target="_blank">
+                        Microsoft 365
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.dropbox.com/" target="_blank">
+                        Dropbox
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.android.com/" target="_blank">
+                        Android
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <strong>
+        Joaquín Rodriguez Morales
+    </strong>
+
+    · Matrícula 26021030
+
+    · Aplicaciones Web PREPA+ v2
+
+    · UVEG
+
+</footer>
+
+
+</body>
+</html>
